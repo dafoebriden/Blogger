@@ -1,19 +1,8 @@
 <template>
   <div class="container">
-    <div class="row blog rounded my-2" v-for="blog in blogs" :key="blog.id">
-      <div class="col-8">
-        <div class="d-flex align-items-center mt-2">
-          <img class="profile-img rounded-circle me-3" :src="blog.creatorPicture" :alt="blog.creatorName">
-          <h3>{{ blog.creatorName }}</h3>
-        </div>
-        <div>
-          <p class=" fw-bold m-0 px-3 pt-2">{{ blog.title }}</p>
-          <p class="blog-body px-2 m-0 ">{{ blog.body }}</p>
-        </div>
-      </div>
-      <div class="col-4 p-0">
-        <img class="img-fluid post-img" :src="blog.imgUrl" :alt="blog.title">
-      </div>
+    <div class="row blog rounded my-2 selectable" role="button" v-for="blog in blogs" :key="blog.id"
+      data-bs-toggle="modal" data-bs-target="#BlogModal">
+      <BlogCard :blog="blog" />
     </div>
   </div>
 </template>
@@ -23,6 +12,7 @@ import Pop from '../utils/Pop';
 import { blogsService } from '../services/BlogsService.js'
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js'
+import BlogCard from '../components/BlogCard.vue'
 
 export default {
   setup() {
@@ -40,35 +30,24 @@ export default {
     return {
       blogs: computed(() => AppState.blogs),
     }
-  }
+  },
+  components: { BlogCard }
 }
 </script>
 
 <style scoped lang="scss">
-.column {
-  columns: 1;
-  column-gap: 1;
-}
-
-.post-img {
-  height: 20vh;
-  width: 100%;
-}
-
-.profile-img {
-  height: 5vh;
-}
-
-.blog-body {
-  height: 15vh;
-  width: fit-content;
-  overflow: scroll;
-
-}
-
 .blog {
   border: 5px solid black;
   border-radius: 5em;
 
+}
+
+.container {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 </style>
