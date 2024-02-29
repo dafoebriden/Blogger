@@ -1,43 +1,74 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="container">
+    <div class="row blog rounded my-2" v-for="blog in blogs" :key="blog.id">
+      <div class="col-8">
+        <div class="d-flex align-items-center mt-2">
+          <img class="profile-img rounded-circle me-3" :src="blog.creatorPicture" :alt="blog.creatorName">
+          <h3>{{ blog.creatorName }}</h3>
+        </div>
+        <div>
+          <p class=" fw-bold m-0 px-3 pt-2">{{ blog.title }}</p>
+          <p class="blog-body px-2 m-0 ">{{ blog.body }}</p>
+        </div>
+      </div>
+      <div class="col-4 p-0">
+        <img class="img-fluid post-img" :src="blog.imgUrl" :alt="blog.title">
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Pop from '../utils/Pop';
+import { blogsService } from '../services/BlogsService.js'
+import { computed, onMounted } from 'vue';
+import { AppState } from '../AppState.js'
+
 export default {
   setup() {
+    async function getBlogs() {
+      try {
+        await blogsService.getBlogs()
+      } catch (error) {
+        Pop.error(error)
+
+      }
+    }
+    onMounted(() => {
+      getBlogs()
+    })
     return {
-      
+      blogs: computed(() => AppState.blogs),
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
+.column {
+  columns: 1;
+  column-gap: 1;
+}
 
-  .home-card {
-    width: clamp(500px, 50vw, 100%);
+.post-img {
+  height: 20vh;
+  width: 100%;
+}
 
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
+.profile-img {
+  height: 5vh;
+}
+
+.blog-body {
+  height: 15vh;
+  width: fit-content;
+  overflow: scroll;
+
+}
+
+.blog {
+  border: 5px solid black;
+  border-radius: 5em;
+
 }
 </style>
