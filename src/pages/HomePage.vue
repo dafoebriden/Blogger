@@ -13,6 +13,7 @@ import { blogsService } from '../services/BlogsService.js'
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js'
 import BlogCard from '../components/BlogCard.vue'
+import BlogModal from '../components/BlogModal.vue'
 
 export default {
   setup() {
@@ -31,7 +32,7 @@ export default {
       blogs: computed(() => AppState.blogs),
     }
   },
-  components: { BlogCard }
+  components: { BlogCard, BlogModal }
 }
 </script>
 
