@@ -1,9 +1,9 @@
 <template>
     <div class="modal fade" id="blogModal" tabindex="-1" aria-labelledby="blogModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div v-if="blog" class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="blogModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="blogModalLabel">{{ blog.title }}</h1>
                 </div>
                 <div class="modal-body">
                 </div>
@@ -17,7 +17,7 @@
 
 <script>
 import { computed } from 'vue';
-import { AppState } from '../AppState';
+import { AppState } from '../AppState.js';
 
 export default {
     setup() {
@@ -26,6 +26,7 @@ export default {
         }
     }
 }
+
 </script>
 
 

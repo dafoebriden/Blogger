@@ -1,7 +1,6 @@
 <template>
   <div class="container">
-    <div class="row blog rounded my-2 selectable" role="button" v-for="blog in blogs" :key="blog.id"
-      data-bs-toggle="modal" data-bs-target="#BlogModal">
+    <div class="row blog my-2" v-for="blog in blogs" :key="blog.id">
       <BlogCard :blog="blog" />
     </div>
   </div>
@@ -13,7 +12,6 @@ import { blogsService } from '../services/BlogsService.js'
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js'
 import BlogCard from '../components/BlogCard.vue'
-import BlogModal from '../components/BlogModal.vue'
 
 export default {
   setup() {
@@ -32,14 +30,14 @@ export default {
       blogs: computed(() => AppState.blogs),
     }
   },
-  components: { BlogCard, BlogModal }
+  components: { BlogCard }
 }
 </script>
 
 <style scoped lang="scss">
 .blog {
-  border: 5px solid black;
-  border-radius: 5em;
+  border: 10px solid black;
+  border-radius: 3em;
 
 }
 
