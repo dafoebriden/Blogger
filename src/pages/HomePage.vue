@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Pop from '../utils/Pop';
+import Pop from '../utils/Pop.js';
 import { blogsService } from '../services/BlogsService.js'
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js'

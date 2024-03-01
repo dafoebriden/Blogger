@@ -55,12 +55,13 @@ export default {
 }
 
 .blog-body {
-    height: 10vh;
+    height: 8vh;
     width: fit-content;
     overflow: hidden;
 }
 
 .height {
     height: 20vh;
+    margin-left: 2;
 }
 </style>
